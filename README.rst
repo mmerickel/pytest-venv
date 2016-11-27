@@ -1,6 +1,6 @@
-======
-hupper
-======
+===========
+pytest-venv
+===========
 
 .. image:: https://img.shields.io/pypi/v/pytest-venv.svg
     :target: https://pypi.python.org/pypi/pytest-venv
