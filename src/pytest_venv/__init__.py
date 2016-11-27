@@ -24,6 +24,7 @@ class VirtualEnvironment(object):
 
     def create(self, system_packages=False):
         cmd = [sys.executable, '-m', 'virtualenv']
+        cmd += ['-p', sys.executable]
         if system_packages:
             cmd += ['--system-site-packages']
         cmd += [self.path]
