@@ -4,7 +4,7 @@ def test_it(venv):
     result = subprocess.check_output(
         [venv.python, '-c', 'print("hello world")'],
     )
-    assert b'hello world\n' in result
+    assert b'hello world' in result
 
 def test_it_installs_dep(venv):
     venv.install('pyramid')
