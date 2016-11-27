@@ -43,11 +43,18 @@ The ``venv`` fixture is an instance of
 
   The path to the python executable in the virtualenv.
 
-``create(system_site_packages=False)``
+``create(system_site_packages=False, python=None)``
 
   Create a virtualenv. This is called automatically by the ``venv`` fixture.
+  If ``python`` is ``None`` then the virtual environment will be created
+  using the same executable as the active runtime.
 
 ``install(pkg_name, editable=False, upgrade=False)``
 
   Use pip to install a package into the virtualenv. ``pkg_name`` may be a
   path to a package on disk.
+
+``get_version(pkg_name)``
+
+  Returns a ``pkg_resources.Version`` object which is sortable and convertable
+  to a string.

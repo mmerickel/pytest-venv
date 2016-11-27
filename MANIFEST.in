@@ -9,4 +9,4 @@ include CONTRIBUTING.rst
 include .coveragerc
 include tox.ini appveyor.yml .travis.yml rtd.txt
 
-recursive-exclude * __pycache__ *.py[cod]
+recursive-exclude * __pycache__ *.py[cod] *.egg-info
