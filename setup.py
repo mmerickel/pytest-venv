@@ -13,8 +13,8 @@ requires = [
 ]
 
 tests_require = [
+    'coverage',
     'pytest',
-    'pytest-cov',
 ]
 
 setup(
