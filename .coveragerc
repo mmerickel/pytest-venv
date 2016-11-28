@@ -8,3 +8,7 @@ source =
 source =
     src/pytest_venv
     */site-packages/pytest_venv
+
+[report]
+show-missing = true
+precision = 2
