@@ -8,13 +8,13 @@ readme = readfile('README.rst')
 changes = readfile('CHANGES.rst')
 
 requires = [
+    'pytest',
     'setuptools',
     'virtualenv',
 ]
 
 tests_require = [
     'coverage',
-    'pytest',
 ]
 
 setup(
