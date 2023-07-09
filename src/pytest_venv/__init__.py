@@ -26,6 +26,7 @@ class VirtualEnvironment(object):
     def create(self, system_packages=False, python=None):
         cmd = [sys.executable, '-m', 'virtualenv']
         cmd += ['-p', python or sys.executable]
+        cmd += ['--setuptools=bundle']
         if system_packages:
             cmd += ['--system-site-packages']
         cmd += [self.path]
