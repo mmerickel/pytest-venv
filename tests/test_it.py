@@ -2,6 +2,8 @@ import os
 import sys
 import subprocess
 
+import pytest
+
 here = os.path.abspath(os.path.dirname(__file__))
 
 
@@ -15,6 +17,20 @@ def test_it(venv):
 def test_it_installs_dep(venv):
     venv.install('pyramid')
     subprocess.check_call([venv.python, '-c', 'import pyramid'])
+
+
+@pytest.mark.skipif(
+    sys.version_info < (3, 12),
+    reason="Make sense only for Python 3.12"
+)
+def test_it_installs_dep_without_setuptools(venv):
+    # micropipenv does not depend on setuptools
+    # so this test verifies that `get_version` works
+    # fine even when setuptools/pkg_resources are
+    # not available in the virtual environment.
+    venv.install('micropipenv')
+    subprocess.check_call([venv.python, '-c', 'import micropipenv'])
+    venv.get_version('micropipenv')
 
 
 def test_it_installs_editable_dep(venv):
