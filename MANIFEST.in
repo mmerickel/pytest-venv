@@ -7,7 +7,8 @@ include CHANGES.rst
 include LICENSE.txt
 include CONTRIBUTING.rst
 
-include .coveragerc
+include pyproject.toml
+include .coveragerc .flake8 pytest.ini
 include tox.ini
 
 recursive-exclude * __pycache__ *.py[cod]

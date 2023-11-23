@@ -1,8 +1,8 @@
 import os
 import packaging.version as pv
 import pytest
-import sys
 import subprocess
+import sys
 import textwrap
 
 WIN = sys.platform == 'win32'
@@ -22,7 +22,7 @@ class VirtualEnvironment(object):
             self.path,
             'bin' if sys.platform != 'win32' else 'Scripts',
         )
-        self.python = os.path.join(self.bin, 'python3')
+        self.python = os.path.join(self.bin, 'python')
 
     def create(self, system_packages=False, python=None, *, extra_args=None):
         cmd = [sys.executable, '-m', 'virtualenv']
@@ -34,7 +34,9 @@ class VirtualEnvironment(object):
         cmd += [self.path]
         subprocess.check_call(cmd)
 
-    def install(self, pkg_name, editable=False, upgrade=False, *, extra_args=None):
+    def install(
+        self, pkg_name, editable=False, upgrade=False, *, extra_args=None
+    ):
         cmd = [self.python, '-m', 'pip', 'install']
         if upgrade:
             cmd += ['-U']

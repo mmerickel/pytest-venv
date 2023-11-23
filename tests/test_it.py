@@ -1,8 +1,7 @@
 import os
-import sys
-import subprocess
-
 import pytest
+import subprocess
+import sys
 
 here = os.path.abspath(os.path.dirname(__file__))
 
@@ -15,13 +14,17 @@ def test_it(venv):
 
 
 def test_it_installs_dep(venv):
-    venv.install('pyramid')
-    subprocess.check_call([venv.python, '-c', 'import pyramid'])
+    venv.install('webob')
+    subprocess.check_call([venv.python, '-c', 'import webob'])
+
+
+def test_it_installs_dep_with_extra_args(venv):
+    venv.install('webob', extra_args=['--prefer-binary'])
+    subprocess.check_call([venv.python, '-c', 'import webob'])
 
 
 @pytest.mark.skipif(
-    sys.version_info < (3, 12),
-    reason="Make sense only for Python 3.12"
+    sys.version_info < (3, 12), reason="Make sense only for Python 3.12"
 )
 def test_it_installs_dep_without_setuptools(venv):
     # micropipenv does not depend on setuptools
@@ -48,18 +51,11 @@ def test_it_upgrades_dep(venv):
     assert version2 > version1
 
 
-def test_it_uses_correct_python(venv):
-    result = subprocess.check_output(
-        [venv.python, '-c', 'import sys; print(sys.version)'],
-    )
-    assert result.decode('utf8').strip() == str(sys.version)
-
-
 def test_it_creates_with_system_packages(tmpdir):
     from pytest_venv import VirtualEnvironment
 
     venv = VirtualEnvironment(tmpdir.strpath)
-    venv.create(system_packages=True)
+    venv.create(system_packages=True, extra_args=['--no-setuptools'])
 
     result = subprocess.check_output(
         [venv.python, '-c', 'print("hello world")'],

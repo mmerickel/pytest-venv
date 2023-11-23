@@ -1,8 +1,10 @@
-from setuptools import setup, find_packages
+from setuptools import find_packages, setup
+
 
 def readfile(name):
     with open(name) as f:
         return f.read()
+
 
 readme = readfile('README.rst')
 changes = readfile('CHANGES.rst')
@@ -22,6 +24,7 @@ setup(
     version='0.2.1',
     description='py.test fixture for creating a virtual environment',
     long_description=readme + '\n\n' + changes,
+    long_description_content_type='text/x-rst',
     author='Michael Merickel',
     author_email='michael@merickel.org',
     url='https://github.com/mmerickel/pytest-venv',
@@ -40,12 +43,7 @@ setup(
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
