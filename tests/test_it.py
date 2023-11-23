@@ -51,6 +51,16 @@ def test_it_upgrades_dep(venv):
     assert version2 > version1
 
 
+def test_get_version_returns_none(venv):
+    version = venv.get_version('pyramid', raises=False)
+    assert version is None
+
+
+def test_get_version_raises(venv):
+    with pytest.raises(Exception, match='package is not installed'):
+        venv.get_version('pyramid')
+
+
 def test_it_creates_with_system_packages(tmpdir):
     from pytest_venv import VirtualEnvironment
 

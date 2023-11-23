@@ -47,7 +47,7 @@ class VirtualEnvironment(object):
         cmd += [pkg_name]
         subprocess.check_call(cmd)
 
-    def get_version(self, pkg_name):
+    def get_version(self, pkg_name, *, raises=True):
         script = textwrap.dedent(
             f'''
             try:
@@ -56,8 +56,15 @@ class VirtualEnvironment(object):
                 import pkg_resources
                 version = lambda x: pkg_resources.get_distribution(x).version
 
-            print(version("{pkg_name}"))
+            try:
+                print(version("{pkg_name}"))
+            except Exception:
+                print('')
             '''
         )
         version = subprocess.check_output([self.python, '-c', script]).strip()
+        if not version:
+            if raises:
+                raise Exception('package is not installed')
+            return None
         return pv.Version(version.decode('utf8'))
