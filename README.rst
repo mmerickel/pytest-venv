@@ -5,8 +5,8 @@ pytest-venv
 .. image:: https://img.shields.io/pypi/v/pytest-venv.svg
     :target: https://pypi.python.org/pypi/pytest-venv
 
-.. image:: https://img.shields.io/travis/mmerickel/pytest-venv.svg
-    :target: https://travis-ci.org/mmerickel/pytest-venv
+.. image:: https://github.com/mmerickel/pytest-venv/actions/workflows/ci-tests.yml/badge.svg?branch=main
+    :target: https://github.com/mmerickel/pytest-venv/actions/workflows/ci-tests.yml?query=branch%3Amain
 
 ``pytest-venv`` is a simple pytest plugin that exposes a ``venv`` fixture.
 The fixture is used to create a new virtual environment which can be used
@@ -43,18 +43,18 @@ The ``venv`` fixture is an instance of
 
   The path to the python executable in the virtualenv.
 
-``create(system_site_packages=False, python=None)``
+``create(system_site_packages=False, python=None, *, extra_args=None)``
 
   Create a virtualenv. This is called automatically by the ``venv`` fixture.
   If ``python`` is ``None`` then the virtual environment will be created
   using the same executable as the active runtime.
 
-``install(pkg_name, editable=False, upgrade=False)``
+``install(pkg_name, editable=False, upgrade=False, *, extra_args=None)``
 
   Use pip to install a package into the virtualenv. ``pkg_name`` may be a
   path to a package on disk.
 
-``get_version(pkg_name)``
+``get_version(pkg_name, *, raises=True)``
 
   Returns a ``packaging.version.Version`` object which is sortable and
   convertable to a string.
