@@ -8,6 +8,6 @@ include LICENSE.txt
 include CONTRIBUTING.rst
 
 include .coveragerc
-include tox.ini appveyor.yml .travis.yml rtd.txt
+include tox.ini
 
 recursive-exclude * __pycache__ *.py[cod]

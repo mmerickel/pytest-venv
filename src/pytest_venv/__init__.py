@@ -22,7 +22,7 @@ class VirtualEnvironment(object):
             self.path,
             'bin' if sys.platform != 'win32' else 'Scripts',
         )
-        self.python = os.path.join(self.bin, 'python')
+        self.python = os.path.join(self.bin, 'python3')
 
     def create(self, system_packages=False, python=None, *, extra_args=None):
         cmd = [sys.executable, '-m', 'virtualenv']
