@@ -8,8 +8,8 @@ readme = readfile('README.rst')
 changes = readfile('CHANGES.rst')
 
 requires = [
+    'packaging',
     'pytest',
-    'setuptools',
     'virtualenv',
 ]
 

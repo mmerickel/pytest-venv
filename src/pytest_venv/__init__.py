@@ -1,8 +1,9 @@
 import os
-import pkg_resources
+import packaging.version as pv
 import pytest
 import sys
 import subprocess
+import textwrap
 
 WIN = sys.platform == 'win32'
 
@@ -41,24 +42,16 @@ class VirtualEnvironment(object):
         subprocess.check_call(cmd)
 
     def get_version(self, pkg_name):
-        script = (
-            'import pkg_resources; '
-            'print(pkg_resources.get_distribution("%(pkg_name)s").version)'
-        ) % dict(pkg_name=pkg_name)
+        script = textwrap.dedent(
+            f'''
+            try:
+                from importlib.metadata import version
+            except ImportError:
+                import pkg_resources
+                version = lambda x: pkg_resources.get_distribution(x).version
 
-        try:
-            version = subprocess.check_output(
-                [self.python, '-c', script]
-            ).strip()
-        except subprocess.CalledProcessError:
-            # In case setuptools/pkg_resources are not available
-            # in the virtual environment (default in Python 3.12+).
-            script = (
-                'from importlib.metadata import version;'
-                'print(version("%(pkg_name)s"))'
-            ) % dict(pkg_name=pkg_name)
-            version = subprocess.check_output(
-                [self.python, '-c', script]
-            ).strip()
-
-        return pkg_resources.parse_version(version.decode('utf8'))
+            print(version("{pkg_name}"))
+            '''
+        )
+        version = subprocess.check_output([self.python, '-c', script]).strip()
+        return pv.Version(version.decode('utf8'))
