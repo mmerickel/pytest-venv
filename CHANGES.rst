@@ -1,3 +1,21 @@
+0.3 (2023-11-22)
+================
+
+- Drop Python 2.7, 3.4, 3.5, 3.6.
+
+- Add support for Python 3.9, 3.10, 3.11, 3.12.
+
+- No longer expect ``pkg_resources`` to be available in the created virtualenv.
+
+- No longer depend on ``setuptools``.
+
+- Add ``extra_args`` to ``install()`` and ``create()`` to pass extra arguments
+  to the underlying commands.
+
+- Add ``raises=False`` option to ``get_version()`` to avoid raising an
+  exception if a package is not installed.
+
+
 0.2.1 (2020-08-04)
 ==================
 

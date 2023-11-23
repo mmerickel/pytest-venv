@@ -56,5 +56,5 @@ The ``venv`` fixture is an instance of
 
 ``get_version(pkg_name)``
 
-  Returns a ``pkg_resources.Version`` object which is sortable and convertable
-  to a string.
+  Returns a ``packaging.version.Version`` object which is sortable and
+  convertable to a string.
