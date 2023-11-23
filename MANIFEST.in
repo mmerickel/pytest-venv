@@ -1,3 +1,4 @@
+graft .github
 graft src
 graft tests
 prune tests/myapp/*.egg-info
